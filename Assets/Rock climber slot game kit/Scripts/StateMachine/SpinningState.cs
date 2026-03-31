@@ -21,6 +21,8 @@ public class SpinningState : AbstractStateInterface
         Debug.Log("Exit Spinning State");
     }
 
+    
+
     public void OnResultShown()
     {
         throw new System.NotImplementedException();

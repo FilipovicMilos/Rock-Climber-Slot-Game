@@ -1,4 +1,3 @@
-using UnityEngine;
 
 public interface AbstractStateInterface
 {
@@ -9,4 +8,5 @@ public interface AbstractStateInterface
     void OnSpinPressed();
     void OnSpinFinished();
     void OnResultShown();
+    
 }

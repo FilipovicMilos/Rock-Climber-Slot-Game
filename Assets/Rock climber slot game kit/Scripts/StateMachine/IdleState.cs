@@ -12,7 +12,7 @@ public class IdleState : AbstractStateInterface
     public void Enter()
     {
         Debug.Log("Enter Idle state");
-
+        
         allReelsController.ResetToIdle();
     }
 
@@ -20,6 +20,8 @@ public class IdleState : AbstractStateInterface
     {
         Debug.Log("Exit Idle State");
     }
+
+    
 
     public void OnResultShown()
     {

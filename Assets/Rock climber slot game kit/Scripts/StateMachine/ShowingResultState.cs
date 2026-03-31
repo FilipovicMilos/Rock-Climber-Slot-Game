@@ -21,6 +21,8 @@ public class ShowingResultState : AbstractStateInterface
         Debug.Log("Exit ShowingResult State");
     }
 
+    
+
     public void OnResultShown()
     {
         Debug.Log("ShowingResultState: Result finished");

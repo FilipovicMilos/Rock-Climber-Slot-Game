@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReelController
   reelIndex: 0
-  speed: 4000
+  speed: 5000
   symbolHeight: 220
   symbolPool: {fileID: 0}
   reelStripData: {fileID: 11400000, guid: c973aa10ab1a42b468f09290c98cc950, type: 2}

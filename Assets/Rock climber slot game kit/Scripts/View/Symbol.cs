@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
 public class Symbol : MonoBehaviour
@@ -12,6 +11,13 @@ public class Symbol : MonoBehaviour
 
     public SymbolData symbol;
 
+    private Image img;
+
+    private void Awake()
+    {
+        img = GetComponent<Image>();
+    }
+
     public void OnReel(ReelController controller)
     {
         parent = controller;
@@ -22,20 +28,21 @@ public class Symbol : MonoBehaviour
 
     public void OffReel()
     {
-        parent.OnReelStopped -= ResetSymbolSpriteOnReelStopped;
         parent.OnReelSpinning -= SetSymbolSpriteOnReelSpinning;
+        parent.OnReelStopped -= ResetSymbolSpriteOnReelStopped;
+        
         parent = null;
 
-        transform.GetComponent<Image>().sprite = idleSprite;
+        img.sprite = idleSprite;
     }
 
     private void SetSymbolSpriteOnReelSpinning()
     {
-        transform.GetComponent<Image>().sprite = spinningSprite;
+        img.sprite = spinningSprite;
     }
 
     private void ResetSymbolSpriteOnReelStopped()
     {
-        transform.GetComponent<Image>().sprite = idleSprite;
+        img.sprite = idleSprite;
     }
 }

@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
 
-
-
 public class ReelController : MonoBehaviour
 {
     
@@ -12,7 +10,7 @@ public class ReelController : MonoBehaviour
 
     private float move = 0;
 
-    public float speed = 4000f;
+    public float speed = 5000f;
 
     public float symbolHeight = 220f;
     [SerializeField] private Transform symbolPool;
@@ -33,6 +31,20 @@ public class ReelController : MonoBehaviour
     public Action OnReelStopped;
     public Action OnReelSpinning;
 
+    /// <summary> LOGIKA ZA BOUNCE
+    private bool isBouncing = false;
+
+    private float bounceTimer = 0f;
+    private float bounceDuration = 0.1f;
+
+    private float startY;
+    private float targetY;
+    private float overshootY;
+
+    private float overshootAmount = 40f;
+    /// </summary>
+    
+
     private void Awake()
     {
         reelRect = GetComponent<RectTransform>();
@@ -40,14 +52,16 @@ public class ReelController : MonoBehaviour
         currentIndex = UnityEngine.Random.Range(0, 100);
     }
 
-    private void Start()
-    {
-        
-    }
-
+    
     // Update is called once per frame
     void Update()
     {
+        if (isBouncing)
+        {
+            HandleBounce();
+            return;
+        }
+
         if (!isSpinning)
             return;
 
@@ -84,7 +98,7 @@ public class ReelController : MonoBehaviour
             ReplaceLastSymbol();
 
             if (spinCounter == spinDuration)
-                StopSpinWithResult();
+                StartBounce();
 
         }
 
@@ -105,6 +119,8 @@ public class ReelController : MonoBehaviour
             PlaceSymbolOnReel(s, -1);
             s.transform.SetAsFirstSibling();
         }
+
+        OnReelSpinning?.Invoke();
     }
 
     private Symbol GetSymbolFromPool(SymbolData data)
@@ -134,9 +150,48 @@ public class ReelController : MonoBehaviour
         OnReelSpinning?.Invoke();
     }
 
-    internal void StopSpinWithResult()
+    private void StartBounce()
     {
         isSpinning = false;
+        isBouncing = true;
+
+        bounceTimer = 0f;
+
+        startY = reelRect.anchoredPosition.y;
+        targetY = startPosition.y;
+
+
+        overshootY = targetY - overshootAmount;
+    }
+
+    private void HandleBounce()
+    {
+        bounceTimer += Time.deltaTime;
+        float t = bounceTimer / bounceDuration;
+
+        if (t < 0.5f)
+        {
+            
+            float phaseT = t / 0.5f;
+            float y = Mathf.Lerp(startY, overshootY, phaseT);
+            reelRect.anchoredPosition = new Vector2(reelRect.anchoredPosition.x, y);
+        }
+        else if (t >= 0.5f && t < 1f)
+        {
+            
+            float phaseT = (t - 0.5f) / 0.5f;
+            float y = Mathf.Lerp(overshootY, targetY, phaseT);
+            reelRect.anchoredPosition = new Vector2(reelRect.anchoredPosition.x, y);
+        }
+        else
+        {
+            StopSpinWithResult();
+        }
+    }
+
+    internal void StopSpinWithResult()
+    {
+        isBouncing = false;
         spinCounter = 0;
 
         reelRect.anchoredPosition = startPosition;

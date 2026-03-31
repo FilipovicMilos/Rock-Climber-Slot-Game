@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AllReelsController : MonoBehaviour
@@ -55,8 +52,6 @@ public class AllReelsController : MonoBehaviour
     {
         for (int i = 0; i < reels.Length; i++)
         {
-            int totalVisible = slotConfigData.numberOfInPlayElements + slotConfigData.numberOfHiddenElements;
-
             reels[i].SetInitialSymbols(slotConfigData.numberOfHiddenElements, slotConfigData.numberOfInPlayElements);
         }
     }
@@ -119,14 +114,13 @@ public class AllReelsController : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            reels[i].StartSpin();
+            reels[i].SetReelSpinResult(gameResult.finalIndexes[i]);
         }
 
         for (int i = 0; i < 5; i++)
         {
-            reels[i].SetReelSpinResult(gameResult.finalIndexes[i]);
+            reels[i].StartSpin();
         }
-
     }
 
     private void CheckIfAllReelsStopped()

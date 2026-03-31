@@ -1,5 +1,3 @@
-using NUnit.Framework.Internal;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +31,7 @@ public class ResultView : MonoBehaviour
 
         AnimateLines(gameResult.lineWins);
 
-
+        AnimateWinFramesAndWinEffects(gameResult.lineWins);
     }
 
     private void AnimateLines(List<LineWin> lineWins)
@@ -56,6 +54,13 @@ public class ResultView : MonoBehaviour
             childLeft.GetChild(0).GetComponent<Image>().enabled = true;
         }
 
+    }
+
+    private void AnimateWinFramesAndWinEffects(List<LineWin> lineWins)
+    {
+        //for (int i = 0; i < lineWins.Count; i++) {
+        //    Symbol s = lineWins[i].symbol;
+        //}
     }
 
     internal void EndLinesAnimation()
