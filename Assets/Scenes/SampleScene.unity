@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1140, y: -93.8}
+  m_AnchoredPosition: {x: 1140, y: -100}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &13883783
@@ -786,7 +786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -300}
+  m_AnchoredPosition: {x: 0, y: -320}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &69954628
@@ -858,7 +858,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: e8c6f9782e431f744a6c1f519bde5b08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1849,6 +1849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 137732467}
+  - component: {fileID: 137732468}
   m_Layer: 5
   m_Name: ResultMatrix
   m_TagString: Untagged
@@ -1880,6 +1881,22 @@ RectTransform:
   m_AnchoredPosition: {x: -463, y: 320}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &137732468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137732466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078e91ba8ad071a4a9ce7efb3defb423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResultView
+  totalWinController: {fileID: 812668482}
+  resultGrid: {fileID: 137732467}
+  leftLinesNumbers: {fileID: 452118102}
+  rightLinesNumbers: {fileID: 38762144}
 --- !u!1 &143121846
 GameObject:
   m_ObjectHideFlags: 0
@@ -5095,8 +5112,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -119}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 50, y: -100}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &461642679
 MonoBehaviour:
@@ -5802,7 +5819,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 41.896706, z: 0, w: 39.431377}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6229,7 +6246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 562193450156910275, guid: 3d1ff3d47e7ea72499f7d856353ca8ab, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 105.59381
+      value: 331.4
       objectReference: {fileID: 0}
     - target: {fileID: 562193450156910275, guid: 3d1ff3d47e7ea72499f7d856353ca8ab, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6604,7 +6621,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000b9684566
+  m_ApplyToSortingLayers: 00000000b9684566576a09fa
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -8071,7 +8088,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 800, y: -93.8}
+  m_AnchoredPosition: {x: 800, y: -100}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &795836811
@@ -8284,15 +8301,15 @@ RectTransform:
   - {fileID: 461642678}
   - {fileID: 1539003045}
   - {fileID: 795836810}
-  - {fileID: 1702894862}
   - {fileID: 13883782}
+  - {fileID: 1702894862}
   - {fileID: 1268893188}
   m_Father: {fileID: 1603195768}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -600, y: -425}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -600, y: -394.823}
+  m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &812668481
 MonoBehaviour:
@@ -8309,7 +8326,7 @@ MonoBehaviour:
   slotConfigData: {fileID: 11400000, guid: 0effc92e8d677974b8fdc474531fb152, type: 2}
   spinButtonController: {fileID: 812668484}
   slotGameController: {fileID: 1880035583}
-  resultView: {fileID: 842311144}
+  resultView: {fileID: 137732468}
   reel1: {fileID: 994613204}
   reel2: {fileID: 1885285420}
   reel3: {fileID: 1891397374}
@@ -8668,7 +8685,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842311143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 078e91ba8ad071a4a9ce7efb3defb423, type: 3}
   m_Name: 
@@ -12348,7 +12365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6920127314712009583, guid: 3a29309483c50e145a13e1230b881725, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4870.8003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6920127314712009583, guid: 3a29309483c50e145a13e1230b881725, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12939,7 +12956,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1491, y: -37}
+  m_AnchoredPosition: {x: 1491, y: -60}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1268893189
@@ -13680,7 +13697,7 @@ Transform:
   m_GameObject: {fileID: 1300453565}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 798.5, y: 594.4579, z: 0}
+  m_LocalPosition: {x: 722, y: 553.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14656,9 +14673,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: 1715824825
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7620a0a5fd4ab19458789c11e3626977, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -16446,8 +16463,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 389, y: -119}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 360, y: -100}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1539003046
 MonoBehaviour:
@@ -18080,8 +18097,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 651, y: 42}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: 651.0203, y: 27.5}
+  m_SizeDelta: {x: 300, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1702894863
 MonoBehaviour:
@@ -19270,7 +19287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6920127314712009583, guid: 3a29309483c50e145a13e1230b881725, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4870.8003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6920127314712009583, guid: 3a29309483c50e145a13e1230b881725, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20002,7 +20019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlotGameController
   spinButtonController: {fileID: 812668484}
-  resultView: {fileID: 842311144}
+  resultView: {fileID: 137732468}
   allReelsController: {fileID: 812668481}
   betPerLineController: {fileID: 1872738408}
   paylinesController: {fileID: 1432340206}
@@ -20163,7 +20180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6920127314712009583, guid: 3a29309483c50e145a13e1230b881725, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4870.8003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6920127314712009583, guid: 3a29309483c50e145a13e1230b881725, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20359,7 +20376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6920127314712009583, guid: 3a29309483c50e145a13e1230b881725, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4870.8003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6920127314712009583, guid: 3a29309483c50e145a13e1230b881725, type: 3}
       propertyPath: m_LocalRotation.w

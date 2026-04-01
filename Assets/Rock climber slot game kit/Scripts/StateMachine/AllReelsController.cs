@@ -78,7 +78,7 @@ public class AllReelsController : MonoBehaviour
 
     public void OnSpinButtonPressed()
     {
-        resultView.EndLinesAnimation();
+        resultView.EndWinAnimations();
 
         currentState?.OnSpinPressed();
     }

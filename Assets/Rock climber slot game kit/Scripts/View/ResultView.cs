@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,10 +14,17 @@ public class ResultView : MonoBehaviour
     [SerializeField] private GameObject leftLinesNumbers;
     [SerializeField] private GameObject rightLinesNumbers;
 
-    GameResult gameResult;
+    private GameResult gameResult;
+
+    private Transform symbolInReel;
+
+    private Vector3 positionVector;
 
     private void Awake()
     {
+        gameResult = null;
+        symbolInReel = null;
+        positionVector = new Vector3(-1, 2, 0);
 
         int reels = resultGrid.childCount;
         int rows = resultGrid.GetChild(0).childCount;
@@ -31,7 +39,7 @@ public class ResultView : MonoBehaviour
 
         AnimateLines(gameResult.lineWins);
 
-        AnimateWinFramesAndWinEffects(gameResult.lineWins);
+        AnimateWinFramesAndWinEffects(gameResult);
     }
 
     private void AnimateLines(List<LineWin> lineWins)
@@ -56,14 +64,45 @@ public class ResultView : MonoBehaviour
 
     }
 
-    private void AnimateWinFramesAndWinEffects(List<LineWin> lineWins)
+    private void AnimateWinFramesAndWinEffects(GameResult gameResult)
     {
-        //for (int i = 0; i < lineWins.Count; i++) {
-        //    Symbol s = lineWins[i].symbol;
-        //}
+        for (int i = 0; i < gameResult.lineWins.Count; i++) {
+
+            LineWin lineWin = gameResult.lineWins[i];
+            int matchCount = lineWin.matchCount;
+
+            for (int j = 0; j < matchCount; j++)
+            {
+                int indexInReel = lineWin.line.rowIndices[j];
+
+                Transform reel = transform.GetChild(j);
+
+                symbolInReel = reel.GetChild(indexInReel + 1);
+
+                symbolInReel.GetChild(0).GetComponent<RectTransform>().anchoredPosition = positionVector;
+                symbolInReel.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+
+                symbolInReel.GetChild(1).GetComponent<RectTransform>().anchoredPosition = positionVector;
+                symbolInReel.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+
+        
     }
 
-    internal void EndLinesAnimation()
+    internal void EndWinAnimations()
+    {
+        if (symbolInReel == null)
+            return;
+
+        EndWinEffectAndFrame();
+
+        EndLinesAnimation();
+
+        gameResult = null;
+    }
+
+    private void EndLinesAnimation()
     {
 
         for (int i = 0; i < leftLinesNumbers.transform.childCount; i++) {
@@ -82,4 +121,27 @@ public class ResultView : MonoBehaviour
         }
     }
 
+
+    private void EndWinEffectAndFrame()
+    {
+        for (int i = 0; i < gameResult.lineWins.Count; i++)
+        {
+
+            LineWin lineWin = gameResult.lineWins[i];
+            int matchCount = lineWin.matchCount;
+
+            for (int j = 0; j < matchCount; j++)
+            {
+                int indexInReel = lineWin.line.rowIndices[j];
+
+                Transform reel = transform.GetChild(j);
+
+                symbolInReel = reel.GetChild(indexInReel + 1);
+
+                symbolInReel.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+
+                symbolInReel.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
+            }
+        }
+    }
 }

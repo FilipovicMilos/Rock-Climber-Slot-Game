@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Animations
-  - 
+  - Win
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Animations
     uniqueID: 1715824825
+    locked: 0
+  - name: Win
+    uniqueID: 4194921047
     locked: 0
   m_RenderingLayers:
   - Default
