@@ -37,7 +37,9 @@ public class SpinningState : AbstractStateInterface
 
     public void OnSpinPressed()
     {
-        Debug.Log("Cannot spin in Spinning state");
+        Debug.Log("pritisnut spin dugme dok je masina u spinning state pa pozivam fast spin");
+
+        allReelsController.CallFastSpin();
     }
 
     

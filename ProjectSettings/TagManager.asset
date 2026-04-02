@@ -44,6 +44,12 @@ TagManager:
   - name: Animations
     uniqueID: 1715824825
     locked: 0
+  - name: Lines
+    uniqueID: 2789619531
+    locked: 0
+  - name: Buttons
+    uniqueID: 3242803615
+    locked: 0
   - name: Win
     uniqueID: 4194921047
     locked: 0

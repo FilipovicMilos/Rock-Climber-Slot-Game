@@ -35,13 +35,6 @@ public class SlotGameController : MonoBehaviour
         slotModel = new SlotModel(slotConfigData, reelStripsData, paylinesData, paytableData, scatterData);
     }
 
-    //*++ MonoBehaviour is created
-    void Start()
-    {
-        spinButtonController.EnableButton();
-        
-    }
-
     public GameResult RequestSpin() {
 
         Debug.Log("Trenutni balans kredita je " + BalanceController.currentBalance);
@@ -70,9 +63,7 @@ public class SlotGameController : MonoBehaviour
 
     private GameResult CallSpin(double betPerLine, int paylinesNumber)
     {
-        spinButtonController.DisableButton();
-
-
+        
         gameResult = slotModel.Spin(betPerLine, paylinesNumber, paylinesData);
 
         PrintResult(gameResult);

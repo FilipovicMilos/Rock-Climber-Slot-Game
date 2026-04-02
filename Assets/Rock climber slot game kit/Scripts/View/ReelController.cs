@@ -25,6 +25,8 @@ public class ReelController : MonoBehaviour
 
     [SerializeField] private Vector2 startPosition;
 
+    [SerializeField] private int fastSpinPlusIncrementForRealisticFastSpin;
+
     
     private int finalIndex;
 
@@ -147,6 +149,7 @@ public class ReelController : MonoBehaviour
     public void StartSpin()
     {
         isSpinning = true;
+        spinCounter = 0;
         OnReelSpinning?.Invoke();
     }
 
@@ -222,5 +225,11 @@ public class ReelController : MonoBehaviour
             Symbol s = GetSymbolFromPool(elementFromReelStrip);
             PlaceSymbolOnReel(s, i);
         }
+    }
+
+    internal void FastSpin()
+    {
+        spinCounter = spinDuration - 4 - fastSpinPlusIncrementForRealisticFastSpin;
+
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR.Haptics;
 using UnityEngine.UI;
 
 public class SpinButtonController : MonoBehaviour
@@ -14,6 +13,7 @@ public class SpinButtonController : MonoBehaviour
     private void Awake()
     {
         spinButton.onClick.AddListener(OnSpinClicked);
+        EnableButton();
     }
 
     // Update is called once per frame

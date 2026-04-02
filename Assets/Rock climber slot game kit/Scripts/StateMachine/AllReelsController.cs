@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AllReelsController : MonoBehaviour
@@ -23,8 +24,11 @@ public class AllReelsController : MonoBehaviour
     private AbstractStateInterface currentState;
     private int reelsStopped;
 
+    private bool startFlag;
+
     private void Awake()
     {
+        startFlag = false;
 
         ChangeState(new IdleState(this));
 
@@ -78,7 +82,12 @@ public class AllReelsController : MonoBehaviour
 
     public void OnSpinButtonPressed()
     {
-        resultView.EndWinAnimations();
+        if (startFlag) {
+            resultView.EndWinAnimations();
+
+        }
+
+        startFlag = true;
 
         currentState?.OnSpinPressed();
     }
@@ -106,6 +115,8 @@ public class AllReelsController : MonoBehaviour
 
             return;
         }
+
+        spinButtonController.EnableButton();
 
         CallAnimateResultView(gameResult);
     }
@@ -147,8 +158,14 @@ public class AllReelsController : MonoBehaviour
 
         slotGameController.CallAddWinToBalance();
 
-        spinButtonController.EnableButton();
-
         OnResultShown();
+    }
+
+    internal void CallFastSpin()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            reels[i].FastSpin();
+        }
     }
 }

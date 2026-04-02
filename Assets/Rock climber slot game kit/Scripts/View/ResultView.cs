@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,13 +18,17 @@ public class ResultView : MonoBehaviour
     private GameResult gameResult;
 
     private Transform symbolInReel;
+    private Transform scatterSymbolInReel;
 
     private Vector3 positionVector;
+
+    [SerializeField] private ScatterData scatterData;
 
     private void Awake()
     {
         gameResult = null;
         symbolInReel = null;
+        scatterSymbolInReel = null;
         positionVector = new Vector3(-1, 2, 0);
 
         int reels = resultGrid.childCount;
@@ -40,6 +45,10 @@ public class ResultView : MonoBehaviour
         AnimateLines(gameResult.lineWins);
 
         AnimateWinFramesAndWinEffects(gameResult);
+
+        
+        AnimateScatterWin(gameResult);
+        
     }
 
     private void AnimateLines(List<LineWin> lineWins)
@@ -66,38 +75,73 @@ public class ResultView : MonoBehaviour
 
     private void AnimateWinFramesAndWinEffects(GameResult gameResult)
     {
-        for (int i = 0; i < gameResult.lineWins.Count; i++) {
 
-            LineWin lineWin = gameResult.lineWins[i];
-            int matchCount = lineWin.matchCount;
-
-            for (int j = 0; j < matchCount; j++)
+            for (int i = 0; i < gameResult.lineWins.Count; i++)
             {
-                int indexInReel = lineWin.line.rowIndices[j];
+                LineWin lineWin = gameResult.lineWins[i];
+                int matchCount = lineWin.matchCount;
 
-                Transform reel = transform.GetChild(j);
+                for (int j = 0; j < matchCount; j++)
+                {
+                    int indexInReel = lineWin.line.rowIndices[j];
 
-                symbolInReel = reel.GetChild(indexInReel + 1);
+                    Transform reel = transform.GetChild(j);
 
-                symbolInReel.GetChild(0).GetComponent<RectTransform>().anchoredPosition = positionVector;
-                symbolInReel.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+                    symbolInReel = reel.GetChild(indexInReel + 1);
 
-                symbolInReel.GetChild(1).GetComponent<RectTransform>().anchoredPosition = positionVector;
-                symbolInReel.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+                    symbolInReel.GetChild(0).GetComponent<RectTransform>().anchoredPosition = positionVector;
+                    symbolInReel.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+
+                    symbolInReel.GetChild(1).GetComponent<RectTransform>().anchoredPosition = positionVector;
+                    symbolInReel.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+                }
+            }
+    }
+
+    private void AnimateScatterWin(GameResult gameResult)
+    {
+
+        if (gameResult.scatterWin.payout == 0)
+            return;
+
+        for (int reelIndex = 0; reelIndex < gameResult.grid.GetLength(0); reelIndex++)
+        {
+
+            for (int rowIndex = 0; rowIndex < gameResult.grid.GetLength(1); rowIndex++)
+            {
+                if (gameResult.grid[reelIndex, rowIndex].symbolID == scatterData.scatterSymbol.symbolID)
+                {
+                    Transform reel = transform.GetChild(reelIndex);
+
+                    scatterSymbolInReel = reel.GetChild(rowIndex + 1);
+
+                    scatterSymbolInReel.GetChild(0).GetComponent<RectTransform>().anchoredPosition = positionVector;
+                    scatterSymbolInReel.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+
+                    scatterSymbolInReel.GetChild(1).GetComponent<RectTransform>().anchoredPosition = positionVector;
+                    scatterSymbolInReel.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+                }
             }
         }
-
-        
     }
 
     internal void EndWinAnimations()
     {
-        if (symbolInReel == null)
+        if (symbolInReel == null && scatterSymbolInReel == null)
+        {
+            gameResult = null;
             return;
+        }
+        else if(symbolInReel == null && scatterSymbolInReel != null)
+        {
+            EndScatterWinAnimation();
+        }
+        else if (symbolInReel != null && scatterSymbolInReel == null)
+        {
+            EndWinEffectAndFrame();
 
-        EndWinEffectAndFrame();
-
-        EndLinesAnimation();
+            EndLinesAnimation();
+        }
 
         gameResult = null;
     }
@@ -124,6 +168,20 @@ public class ResultView : MonoBehaviour
 
     private void EndWinEffectAndFrame()
     {
+        if (gameResult == null)
+        {
+            Debug.Log("prazan result");
+
+            return;
+        }
+        else if (gameResult.lineWins == null || gameResult.lineWins.Count == 0)
+        {
+            Debug.Log("prazna lista");
+
+            return;
+
+        }
+
         for (int i = 0; i < gameResult.lineWins.Count; i++)
         {
 
@@ -141,6 +199,30 @@ public class ResultView : MonoBehaviour
                 symbolInReel.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
 
                 symbolInReel.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
+            }
+        }
+    }
+
+    private void EndScatterWinAnimation()
+    {
+        if (gameResult.scatterWin.payout == 0)
+            return;
+
+        for (int reelIndex = 0; reelIndex < gameResult.grid.GetLength(0); reelIndex++)
+        {
+
+            for (int rowIndex = 0; rowIndex < gameResult.grid.GetLength(1); rowIndex++)
+            {
+                if (gameResult.grid[reelIndex, rowIndex].symbolID == scatterData.scatterSymbol.symbolID)
+                {
+                    Transform reel = transform.GetChild(reelIndex);
+
+                    scatterSymbolInReel = reel.GetChild(rowIndex + 1);
+
+                    scatterSymbolInReel.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+
+                    scatterSymbolInReel.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
+                }
             }
         }
     }
