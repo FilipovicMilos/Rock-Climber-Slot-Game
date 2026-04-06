@@ -9,7 +9,7 @@ public class MegaWinScript : MonoBehaviour
     private double totalWin = 0;
 
     [SerializeField] private TMP_Text totalBetText;
-
+    private int i = 0;
 
     // Update is called once per frame
     void Update()
@@ -19,11 +19,18 @@ public class MegaWinScript : MonoBehaviour
             return;
         }
 
-        winCounter += (totalWin/100);
+        i++;
+        if(i % 2 == 0)
+        {
+            winCounter += 5;
 
-        totalBetText.text = $"{winCounter}";
+            if (winCounter <= totalWin)
+            {
+                totalBetText.text = $"{winCounter}";
+            }
+        }
 
-        if(winCounter == totalWin)
+        if(winCounter >= totalWin + 300)
         {
             transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
             transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
@@ -34,6 +41,7 @@ public class MegaWinScript : MonoBehaviour
 
             flag = false;
             totalWin = 0;
+            i = 0;
         }
     }
 
