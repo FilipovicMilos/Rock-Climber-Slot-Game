@@ -24,6 +24,10 @@ public class ResultView : MonoBehaviour
 
     [SerializeField] private ScatterData scatterData;
 
+    [SerializeField] private MegaWinScript megaWinScript;
+
+    private double totalBet;
+
     private void Awake()
     {
         gameResult = null;
@@ -34,6 +38,7 @@ public class ResultView : MonoBehaviour
         int reels = resultGrid.childCount;
         int rows = resultGrid.GetChild(0).childCount;
 
+        totalBet = 0;
     }
 
     public void AnimateResult(GameResult gameResult)
@@ -46,9 +51,12 @@ public class ResultView : MonoBehaviour
 
         AnimateWinFramesAndWinEffects(gameResult);
 
-        
         AnimateScatterWin(gameResult);
-        
+
+        if(gameResult.totalWin >= totalBet * 10)
+        {
+            megaWinScript.AnimateMegaWin(gameResult.totalWin);
+        }        
     }
 
     private void AnimateLines(List<LineWin> lineWins)
@@ -142,7 +150,15 @@ public class ResultView : MonoBehaviour
 
             EndLinesAnimation();
         }
+        else
+        {
+            EndLinesAnimation();
+            EndScatterWinAnimation();
+            EndWinEffectAndFrame();
+        }
 
+        symbolInReel = null;
+        scatterSymbolInReel = null;
         gameResult = null;
     }
 
@@ -225,5 +241,10 @@ public class ResultView : MonoBehaviour
                 }
             }
         }
+    }
+
+    internal void UpdateTotalBet(double x)
+    {
+        totalBet = x;
     }
 }

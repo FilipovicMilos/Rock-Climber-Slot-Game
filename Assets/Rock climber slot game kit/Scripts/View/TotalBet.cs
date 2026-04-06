@@ -7,6 +7,7 @@ public class TotalBet : MonoBehaviour
 {
     [SerializeField] private LinesController lineController;
     [SerializeField] private BetsController betController;
+    [SerializeField] private ResultView resultView;
 
     [SerializeField] private TMP_Text totalBetText;
 
@@ -44,5 +45,6 @@ public class TotalBet : MonoBehaviour
         x = lineController.numberOfLines * betController.bet;
 
         totalBetText.text = $"TOTAL BET: {x}";
+        resultView.UpdateTotalBet(x);
     }
 }
