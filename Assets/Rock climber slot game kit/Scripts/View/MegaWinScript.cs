@@ -5,7 +5,8 @@ using UnityEngine;
 public class MegaWinScript : MonoBehaviour
 {
     private double winCounter = 0;
-    private bool flag = false;
+    private bool doUpdate = false;
+    private bool doWinCounterLog = false;
     private double totalWin = 0;
 
     [SerializeField] private TMP_Text totalBetText;
@@ -14,23 +15,26 @@ public class MegaWinScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!flag)
+        if (!doUpdate)
         {
             return;
         }
 
-        i++;
-        if(i % 2 == 0)
-        {
-            winCounter += 5;
+        winCounter += (totalWin / 200);
 
-            if (winCounter <= totalWin)
+        i++;
+        if(i % 2 == 0 && doWinCounterLog)
+        {
+            if (winCounter >= totalWin)
             {
-                totalBetText.text = $"{winCounter}";
+                winCounter = totalWin;
+                doWinCounterLog = false;
             }
+
+            totalBetText.text = $"{(int)winCounter}";
         }
 
-        if(winCounter >= totalWin + 300)
+        if(winCounter >= 2 * totalWin)
         {
             transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
             transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
@@ -39,7 +43,8 @@ public class MegaWinScript : MonoBehaviour
             transform.GetChild(3).GetComponent<SpriteRenderer>().enabled = false;
             transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().enabled = false;
 
-            flag = false;
+            winCounter = 0;
+            doUpdate = false;
             totalWin = 0;
             i = 0;
         }
@@ -56,8 +61,8 @@ public class MegaWinScript : MonoBehaviour
         totalWinCounterChild.GetComponent<SpriteRenderer>().enabled = true;
         totalWinCounterChild.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = true;
 
-
-        flag = true;
+        doWinCounterLog = true;
+        doUpdate = true;
         this.totalWin = totalWin;
     }
 }
